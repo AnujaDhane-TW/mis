@@ -1,7 +1,9 @@
+global using Student.Management.System.Domain.Entities;
 using Student.Management.System.Application.Ports.In;
 using Student.Management.System.Application.Ports.Out;
 using Student.Management.System.Application.Services;
 using Student.Management.System.Infrastructure.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +13,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
-builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
