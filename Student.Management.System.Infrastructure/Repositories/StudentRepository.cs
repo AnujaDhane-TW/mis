@@ -9,9 +9,37 @@ namespace Student.Management.System.Infrastructure.Repositories
             new StudentModel(),
             new StudentModel()
         };
+
+        public StudentModel AddStudent(StudentModel student)
+        {
+            return student;
+        }
+
+        public List<StudentModel> DeleteStudent(int id)
+        {
+            return students;
+        }
+
+        public StudentModel GetStudent(int id)
+        {
+            return new StudentModel();
+        }
+
         public List<StudentModel> GetStudents()
         {
             return students;
         }
+
+        public List<StudentModel> GetStudentsWithSubject(int subjectId)
+        {
+            return students;
+        }
+
+        public StudentModel UpdateStudent(StudentModel student)
+        {
+            return student;
+        }
+
+        
     }
 }
