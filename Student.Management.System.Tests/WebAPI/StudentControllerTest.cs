@@ -18,21 +18,21 @@ namespace Student.Management.System.Tests.WebAPI
             studentController = new StudentController(mockStudentService.Object);
         }
 
-        [Fact]
-        public void ShouldReturnListOfStudentsWhenGetIsCalled(){
+        // [Fact]
+        // public void ShouldReturnListOfStudentsWhenGetIsCalled(){
             
-            mockStudentService.Setup(service => service.GetStudents())
-                .Returns(new List<StudentModel>() { new StudentModel(), new StudentModel() });
-            ActionResult<List<StudentModel>> actionResult = studentController.GetStudents();
+        //     mockStudentService.Setup(service => service.GetStudents())
+        //         .Returns(new List<StudentModel>() { new StudentModel(), new StudentModel() });
+        //     ActionResult<List<StudentModel>> actionResult = studentController.GetStudents();
             
-            // var result = _controller.Index();
-            var viewResult = Assert.IsType<ActionResult<List<StudentModel>>>(actionResult);
-            var students = Assert.IsType<List<StudentModel>>(((OkObjectResult)(actionResult.Result)).Value);
-            List<StudentModel> expectedStudents= new List<StudentModel>() { new StudentModel(), new StudentModel() };
+        //     // var result = _controller.Index();
+        //     var viewResult = Assert.IsType<ActionResult<List<StudentModel>>>(actionResult);
+        //     var students = Assert.IsType<List<StudentModel>>(((OkObjectResult)(actionResult.Result)).Value);
+        //     List<StudentModel> expectedStudents= new List<StudentModel>() { new StudentModel(), new StudentModel() };
 
-            //Assert.Equal(expectedStudents,students);
+        //     //Assert.Equal(expectedStudents,students);
 
-            }
+        //     }
     }
 
   

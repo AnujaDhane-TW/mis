@@ -2,48 +2,57 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Student.Management.System.Application.Ports.In;
 using Student.Management.System.Application.Ports.Out;
+using Student.Management.System.Domain.Entities.DTOs;
 
 namespace Student.Management.System.Application.Services
 {
     public class StudentService : IStudentService
     {
-        private IStudentRepository studentRepository;
+        private IStudentRepository _studentRepository;
+        private IMapper _mapper;
 
-        public StudentService( IStudentRepository studentRepository)
+        public StudentService( IStudentRepository studentRepository,IMapper mapper)
         {
-            this.studentRepository = studentRepository;
+            _studentRepository = studentRepository;
+            _mapper=mapper;
+        }
+        public List<GetStudentDto> GetStudents()
+        {
+            return _mapper.Map<List<GetStudentDto>>(_studentRepository.GetStudents());
+        }
+        public GetStudentDto GetStudent(int id)
+        {
+            StudentModel student=_studentRepository.GetStudent(id);
+            return _mapper.Map<GetStudentDto>(student);
+        }
+        public GetStudentDto AddStudent(AddStudentDto addStudentDto)
+        {
+            StudentModel student = _mapper.Map<StudentModel>(addStudentDto);
+            StudentModel addedStudent=_studentRepository.AddStudent(student);
+            return _mapper.Map<GetStudentDto>(addedStudent);
+        }
+        public GetStudentDto DeleteStudent(int id)
+        {
+            StudentModel student = _studentRepository.DeleteStudent(id);
+            return _mapper.Map<GetStudentDto>(student);
         }
 
-        public StudentModel AddStudent(StudentModel student)
+        public List<GetStudentDto> GetStudentsWithSubject(int subjectId)
         {
-            return studentRepository.AddStudent(student);
+            List<StudentModel> students = _studentRepository.GetStudentsWithSubject(subjectId);
+            return _mapper.Map<List<GetStudentDto>>(students);
         }
 
-        public List<StudentModel> DeleteStudent(int id)
-        {
-            return studentRepository.DeleteStudent(id);
-        }
-
-        public StudentModel GetStudent(int id)
-        {
-            return studentRepository.GetStudent(id);
-        }
-
-        public List<StudentModel> GetStudents()
-        {
-            return studentRepository.GetStudents();
-        }
-
-        public List<StudentModel> GetStudentsWithSubject(int subjectId)
-        {
-            return studentRepository.GetStudentsWithSubject(subjectId);
-        }
 
         public StudentModel UpdateStudent(StudentModel student)
         {
-            return studentRepository.UpdateStudent(student);
+            return _studentRepository.UpdateStudent(student);
         }
+
+        
+       
     }
 }

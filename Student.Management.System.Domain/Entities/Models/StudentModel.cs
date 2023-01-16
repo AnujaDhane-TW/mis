@@ -13,7 +13,7 @@ namespace Student.Management.System.Domain.Entities
         public string LastName { get; set; }=string.Empty;
         public string MiddleName { get; set; } =string.Empty;
         public DateTime DateOfBirth { get; set; }
-        public virtual Subject? FavouriteSubject { get; set; }
+        public virtual Subject? FavoriteSubject { get; set; }
 
         [ForeignKey("SubjectId")]
         public int SubjectId { get; set; }

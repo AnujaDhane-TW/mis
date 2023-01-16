@@ -22,12 +22,12 @@ namespace Student.Management.System.Infrastructure.Repositories
                 MiddleName= s.MiddleName,
                 DateOfBirth= s.DateOfBirth,
                 SubjectId= s.SubjectId,
-                FavouriteSubject= new Subject{Name= s.FavouriteSubject.Name, SubjectId= s.FavouriteSubject.SubjectId},
+                FavoriteSubject= new Subject{Name= s.FavoriteSubject.Name, SubjectId= s.FavoriteSubject.SubjectId},
             }).ToList();
         }
         public StudentModel GetStudent(int id)
         {
-            StudentModel student= _context.Students.Find(id);
+            StudentModel student= _context.Students.FirstOrDefault(s=>s.Id==id);
             return student;
         }
         public StudentModel AddStudent(StudentModel student)
@@ -37,13 +37,13 @@ namespace Student.Management.System.Infrastructure.Repositories
             return student;
         }
 
-        public List<StudentModel> DeleteStudent(int id)
+        public StudentModel DeleteStudent(int id)
         {
             StudentModel student= _context.Students.Find(id);
             _context.Students.Remove(student);
             _context.SaveChanges();
 
-            return GetStudents();
+            return student;
         }
 
         public List<StudentModel> GetStudentsWithSubject(int subjectId)
@@ -56,7 +56,7 @@ namespace Student.Management.System.Infrastructure.Repositories
                 MiddleName= s.MiddleName,
                 DateOfBirth= s.DateOfBirth,
                 SubjectId= s.SubjectId,
-                FavouriteSubject= new Subject{Name= s.FavouriteSubject.Name, SubjectId= s.FavouriteSubject.SubjectId},
+                FavoriteSubject= new Subject{Name= s.FavoriteSubject.Name, SubjectId= s.FavoriteSubject.SubjectId},
             }).ToList();
         }
 

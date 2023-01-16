@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Student.Management.System.Application.Ports.In;
+using Student.Management.System.Domain.Entities.DTOs;
 
 namespace Student.Management.System.WebAPI.Controllers
 {
@@ -26,7 +27,7 @@ namespace Student.Management.System.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<StudentModel> AddStudent(StudentModel student){
+        public ActionResult<StudentModel> AddStudent(AddStudentDto student){
             return Ok(studentService.AddStudent(student));
         }
 

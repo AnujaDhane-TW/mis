@@ -10,6 +10,5 @@ namespace Student.Management.System.Domain.Entities
         public int SubjectId { get; set; }
         public string Name { get; set; } =string.Empty;
 
-        //public ICollection<StudentModel>? Students {get; set;}
     }
 }
