@@ -8,6 +8,7 @@ namespace Student.Management.System.Application{
         {
             CreateMap<StudentModel,GetStudentDto>();
             CreateMap<AddStudentDto,StudentModel>();
+            CreateMap<UpdateStudentDto,StudentModel>();
         }
     }
 }

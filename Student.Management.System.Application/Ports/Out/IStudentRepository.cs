@@ -9,6 +9,7 @@ namespace Student.Management.System.Application.Ports.Out
         StudentModel UpdateStudent(StudentModel student);
         StudentModel DeleteStudent(int id);
         StudentModel GetStudent(int id);
+        List<StudentModel> DeleteStudents(int[]  ids);
         List<StudentModel> GetStudentsWithSubject(int subjectId);
     }
 }

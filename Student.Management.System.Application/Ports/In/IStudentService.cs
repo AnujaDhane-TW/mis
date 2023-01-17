@@ -9,7 +9,9 @@ namespace Student.Management.System.Application.Ports.In
         GetStudentDto GetStudent(int id);
         GetStudentDto AddStudent(AddStudentDto student);
         GetStudentDto DeleteStudent(int id);
+        List<GetStudentDto> DeleteStudents(int[] id);
         List<GetStudentDto> GetStudentsWithSubject(int subjectId);
-        StudentModel UpdateStudent(StudentModel student);
+        GetStudentDto UpdateStudent(UpdateStudentDto student);
+
     }
 }

@@ -47,12 +47,17 @@ namespace Student.Management.System.Application.Services
         }
 
 
-        public StudentModel UpdateStudent(StudentModel student)
+        public GetStudentDto UpdateStudent(UpdateStudentDto updateStudentDto)
         {
-            return _studentRepository.UpdateStudent(student);
+            StudentModel student = _mapper.Map<StudentModel>(updateStudentDto);
+            StudentModel updatedStudent=_studentRepository.UpdateStudent(student);
+            return _mapper.Map<GetStudentDto>(updatedStudent);
         }
 
-        
-       
+        public List<GetStudentDto> DeleteStudents(int[] ids)
+        {
+            List<StudentModel> deletedStudents =_studentRepository.DeleteStudents(ids);
+            return _mapper.Map<List<GetStudentDto>>(deletedStudents);
+        }
     }
 }
