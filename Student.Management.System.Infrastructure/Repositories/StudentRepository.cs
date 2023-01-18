@@ -28,7 +28,9 @@ namespace Student.Management.System.Infrastructure.Repositories
         }
         public StudentModel GetStudent(int id)
         {
-            StudentModel student= _context.Students.Where(s=>s.Id==id).Select(s=> new StudentModel{
+            try
+            {
+                StudentModel student= _context.Students.Where(s=>s.Id==id).Select(s=> new StudentModel{
                 Id=s.Id,
                 FirstName= s.FirstName,
                 LastName= s.LastName,
@@ -36,8 +38,13 @@ namespace Student.Management.System.Infrastructure.Repositories
                 DateOfBirth= s.DateOfBirth,
                 SubjectId= s.SubjectId,
                 FavoriteSubject= new Subject{Name= s.FavoriteSubject.Name, SubjectId= s.FavoriteSubject.SubjectId},
-            }).First();
-            return student;
+                }).First();
+                return student;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }      
         }
         public StudentModel AddStudent(StudentModel student)
         {
@@ -59,6 +66,9 @@ namespace Student.Management.System.Infrastructure.Repositories
         public StudentModel DeleteStudent(int id)
         {
             StudentModel student= _context.Students.Find(id);
+            if(student == null){
+                return student;
+            }
             _context.Students.Remove(student);
             _context.SaveChanges();
 
@@ -70,6 +80,10 @@ namespace Student.Management.System.Infrastructure.Repositories
             List<StudentModel> deletedStudents=new List<StudentModel>();
             foreach(int id in ids){
                 StudentModel deletedStudent=_context.Students.Find(id);
+                if (deletedStudent== null)
+                {
+                    return null;
+                }
                 _context.Students.Remove(deletedStudent);
                 deletedStudents.Add(deletedStudent);
             }
@@ -95,11 +109,12 @@ namespace Student.Management.System.Infrastructure.Repositories
         public StudentModel UpdateStudent(StudentModel updateStudent)
         {
             StudentModel student = _context.Students.FirstOrDefault(s => s.Id==updateStudent.Id);
-
-            if (student != null)
+            
+            if (student == null)
             {
-                _context.Entry(student).State = EntityState.Detached;
+               return student;
             }
+            _context.Entry(student).State = EntityState.Detached;
             _context.Entry(updateStudent).State = EntityState.Modified;
 
             _context.SaveChanges();
